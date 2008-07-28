@@ -1,0 +1,33 @@
+<?php
+  // for mizuho.autch.net
+  error_reporting(E_ALL);
+  mb_http_output('euc-jp');
+  mb_internal_encoding('euc-jp');
+
+  // URL ルートへの絶対パス
+  define('TF_URL_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . '/acf/test/www/');
+	// 画像 URL ルートへの絶対パス
+  define('TF_URL_IMAGES', TF_URL_ROOT . 'images');
+  // docroot への物理ディレクトリ。このファイルの dir と同じはず
+  define('TF_DOCUMENT_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'www' . DIRECTORY_SEPARATOR);
+  define('TF_SMARTY_TEMPLATES', dirname(__FILE__) . '/templates/');
+
+  define('TF_LIB_PATH', dirname(__FILE__) . '/lib/');
+  define('TF_VAR_PATH', dirname(__FILE__) . '/var/');
+  define('TF_SMARTY_TEMPLATES_C', TF_VAR_PATH . 'templates_c/');
+  define('TF_SMARTY_PLUGINS', TF_LIB_PATH . 'plugins/');
+
+  define('TF_SMARTY_CACHING', 0);
+  define('TF_SMARTY_CACHE', TF_VAR_PATH . 'cache/');
+  define('TF_SMARTY_CACHE_LIFETIME', 60 * 60);
+  define('TF_SMARTY_COMPILE_CHECK', TRUE);
+
+//  define('TF_DSN_BULLETIN', 'mysql://autch:rf5C68@localhost/autch');
+
+  define('MAGPIE_CACHE_ON', TRUE);
+  define('MAGPIE_CACHE_DIR', TF_VAR_PATH . 'cache/');
+  define('MAGPIE_CACHE_AGE', 60 * 60);  // an hour
+  define('MAGPIE_INPUT_ENCODING', 'UTF-8');
+  define('MAGPIE_OUTPUT_ENCODING', 'UTF-8');
+  define('MAGPIE_DETECT_ENCODING', FALSE);
+  define('MAGPIE_FETCH_TIME_OUT', 20);
