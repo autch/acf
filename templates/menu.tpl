@@ -4,4 +4,5 @@
 {a href="/"}¥È¥Ã¥×{/a}
  | {a href="/rss.html"}RSS{/a}
  | {a href="/link.html"}Link{/a}
+ | {a href="/phpinfo.html"}phpinfo(){/a}
 </div>
