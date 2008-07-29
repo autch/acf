@@ -11,7 +11,7 @@ require_once 'Mail/mime.php';
 require_once 'Mail/RFC822.php';
 
 /*
- * ´Á»úÂÐ±þ¥á¡¼¥ëÁ÷¿®¥¯¥é¥¹
+ * æ¼¢å­—å¯¾å¿œãƒ¡ãƒ¼ãƒ«é€ä¿¡ã‚¯ãƒ©ã‚¹
  * 
  * memo: http://dozo.matrix.jp/pear/index.php/PEAR/Mail_Mime.html
  */
@@ -50,7 +50,7 @@ class TFMailer
     return $body;
   }
   
-  // ¥Ø¥Ã¥À¤ÎÃÍ¤ò¥¨¥ó¥³¡¼¥É¤¹¤ë¤È¤­¤Ë»È¤¦
+  // ãƒ˜ãƒƒãƒ€ã®å€¤ã‚’ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã™ã‚‹ã¨ãã«ä½¿ã†
   function _encodeSubject($subject, $source_encoding = 'EUC-JP')
   {
     $original = mb_internal_encoding();
@@ -85,13 +85,13 @@ class TFMailer
     return implode(', ', $values);
   }
   
-  // ÉáÄÌ¤Î¥Ø¥Ã¥À¤ò»ØÄê¤¹¤ë¤È¤­¤Ë»È¤¦
+  // æ™®é€šã®ãƒ˜ãƒƒãƒ€ã‚’æŒ‡å®šã™ã‚‹ã¨ãã«ä½¿ã†
   function setHeader($name, $value)
   {
     $this->_headers[$name] = $this->_encodeSubject($value);
   }
 
-  // ¥á¡¼¥ë¥¢¥É¥ì¥¹¤ò´Þ¤ó¤À¥Ø¥Ã¥À¤ò»ØÄê¤¹¤ë¤È¤­¤Ë»È¤¦
+  // ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å«ã‚“ã ãƒ˜ãƒƒãƒ€ã‚’æŒ‡å®šã™ã‚‹ã¨ãã«ä½¿ã†
   function setAddressHeader($name, $value)
   {
     $this->_headers[$name] = $this->_encodeAddressHeaders($value);

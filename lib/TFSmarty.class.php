@@ -33,21 +33,21 @@ class TFSmarty extends Smarty
   }
 
   /**
-   * ¥Ç¥Õ¥©¥ë¥È¤Î¥Ñ¥¹¤Ë¥Æ¥ó¥×¥ì¡¼¥È¤¬¤Ê¤«¤Ã¤¿¤È¤­¡¢$this->_alternatives ¤Ç»ØÄê¤µ¤ì¤¿¥Ñ¥¹¤òÃµ¤¹½èÍý¤ò¼ÂÁõ¤¹¤ë¡£
+   * ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ‘ã‚¹ã«ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãŒãªã‹ã£ãŸã¨ãã€$this->_alternatives ã§æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã‚’æŽ¢ã™å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ã€‚
    * 
    * @access private
-   * @param string $resource_type ¥Æ¥ó¥×¥ì¡¼¥È¥ê¥½¡¼¥¹¤Î·ÁÂÖ¡£¤Õ¤Ä¤¦¤Ï "file"
-   * @param string $resource_name ¥Æ¥ó¥×¥ì¡¼¥È¥ê¥½¡¼¥¹Ì¾¡£Smarty::fetch() ¤ä {include} ¤Î°ú¿ô¤¬¤½¤Î¤Þ¤ÞÆþ¤ë¡£
-   * @param string &$template_source ¼èÆÀ¤·¤¿¥Æ¥ó¥×¥ì¡¼¥È¤ÎÆâÍÆ¤òÊÖ¤¹¡£
-   * @param int    &$template_timestamp ¥Æ¥ó¥×¥ì¡¼¥È¤ÎºÇ½ª¹¹¿·»þ¹ï¤ò UNIX ¥¿¥¤¥à¥¹¥¿¥ó¥×¤ÇÊÖ¤¹¡£
-   * @param Smarty &$smarty_obj         ¤³¤Î´Ø¿ô¤ò¸Æ¤Ó½Ð¤·¤¿ $this
-   * @return bool ¥Æ¥ó¥×¥ì¡¼¥È¤ò¸«¤Ä¤±¤¿¤È¤­ TRUE, ¤½¤ì°Ê³° FALSE
+   * @param string $resource_type ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒªã‚½ãƒ¼ã‚¹ã®å½¢æ…‹ã€‚ãµã¤ã†ã¯ "file"
+   * @param string $resource_name ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒªã‚½ãƒ¼ã‚¹åã€‚Smarty::fetch() ã‚„ {include} ã®å¼•æ•°ãŒãã®ã¾ã¾å…¥ã‚‹ã€‚
+   * @param string &$template_source å–å¾—ã—ãŸãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å†…å®¹ã‚’è¿”ã™ã€‚
+   * @param int    &$template_timestamp ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®æœ€çµ‚æ›´æ–°æ™‚åˆ»ã‚’ UNIX ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã§è¿”ã™ã€‚
+   * @param Smarty &$smarty_obj         ã“ã®é–¢æ•°ã‚’å‘¼ã³å‡ºã—ãŸ $this
+   * @return bool ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è¦‹ã¤ã‘ãŸã¨ã TRUE, ãã‚Œä»¥å¤– FALSE
    */
   function defaultTemplateHandler($resource_type, $resource_name, &$template_source, &$template_timestamp, &$smarty_obj) 
   { 
     if($resource_type == 'file')
     {
-      // ¼Â¤Ï¥À¥Ö¥ë¥Á¥§¥Ã¥¯¤Ë¤Ê¤Ã¤Æ¤¤¤ë
+      // å®Ÿã¯ãƒ€ãƒ–ãƒ«ãƒã‚§ãƒƒã‚¯ã«ãªã£ã¦ã„ã‚‹
       $fullpath = sprintf("%s/%s", $this->template_dir, $resource_name);
       $alternatives = $smarty_obj->_alternatives;  // should be copying, not reference
       while(!is_readable($fullpath))

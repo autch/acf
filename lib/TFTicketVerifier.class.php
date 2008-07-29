@@ -6,19 +6,19 @@ require_once TF_LIB_PATH . '/TFOnetimeTicket.class.php';
 define('TFTICKET_SESSION_PREFIX', 'TFTicket_');
 
 /**
- * ��󥿥�������åȤ�ȯ�Ԥȸ���
+ * ワンタイムチケットの発行と検証
  * 
- * ��ȯ�Ԥ�������Τ�̵���ˤʤ륿���פΥ�󥿥�������åȤ�ȯ�Ԥȸ��ڤ�Ԥ���
+ * 再発行すると前のが無効になるタイプのワンタイムチケットの発行と検証を行う。
  * 
  * @package glaxis
  */
 class TFTicketVerifier
 {
   /**
-   * �����å�Ⱦ���򥻥å������ݻ�����ݤΥ������ղä���ץ�ե��å������ݻ����롣
+   * チケット半券をセッションに保持する際のキーに付加するプリフィックスを保持する。
    * 
-   * setPrefix() �ǥ��å���󥭡��˥ץ�ե�������Ĥ��뤳�Ȥǡ��ۤ��Υ��å�����ѿ��Ȥξ��ͤ��ɤ���
-   * @var string ���å���󥭡��Υץ�ե��å������ǥե���Ȥ϶���
+   * setPrefix() でセッションキーにプリフィクスをつけることで、ほかのセッション変数との衝突を防ぐ。
+   * @var string セッションキーのプリフィックス。デフォルトは空。
    * @access private
    */
   var $prefix_;
@@ -28,8 +28,8 @@ class TFTicketVerifier
     $this->prefix_ = $prefix;
   }
   /**
-   * �����å�Ⱦ���򥻥å������ݻ�����ݤΥ������ղä���ץ�ե��å��������ꤹ�롣
-   * @param string $prefix ���å���󥭡����ղä���ץ�ե��å�����
+   * チケット半券をセッションに保持する際のキーに付加するプリフィックスを設定する。
+   * @param string $prefix セッションキーに付加するプリフィックス。
    * @access public
    */
   function setPrefix($prefix)
@@ -37,12 +37,12 @@ class TFTicketVerifier
     $this->prefix_ = $prefix;
   }
   /**
-   * �ǥե���ȤΥ�󥿥�������åȤ�ȯ�Ԥ���
+   * デフォルトのワンタイムチケットを発行する
    * 
-   * �ǥե���ȤΥ�󥿥�������åȤ����������֤���Ʊ̾�ǰ�����ȯ�Ԥ��������åȤ�̵���ˤʤ롣
+   * デフォルトのワンタイムチケットを生成して返す。同名で以前に発行したチケットは無効になる。
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի��ȸ��ڻ���Ʊ��̾���ˤ��ʤ���Фʤ�ʤ���
-   * @return glxOnetimeTicket ��������󥿥�������åȡ�
+   * @param string $name チケットの名前。発行時と検証時で同じ名前にしなければならない。
+   * @return glxOnetimeTicket 新しいワンタイムチケット。
    */
   function& createTicket($name)
   {
@@ -52,58 +52,58 @@ class TFTicketVerifier
     return $ticket;
   }
   /**
-   * �����åȤ򥻥å����˻�������ݤΥ������֤�
+   * チケットをセッションに持たせる際のキーを返す
    * 
-   * ȯ�Ԥ��줿�����åȤ򥻥å�����ѿ��˻�������ݤΥ����� $name �����ä��֤���
+   * 発行されたチケットをセッション変数に持たせる際のキーを $name から作って返す。
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի��ȸ��ڻ���Ʊ��̾����Ȥ����ȡ�
-   * @return string ���å�����ѿ��Υ����˻Ȥ�ʸ����
+   * @param string $name チケットの名前。発行時と検証時は同じ名前を使うこと。
+   * @return string セッション変数のキーに使う文字列
    */
   function getSessionKey($name)
   {
     return TFTICKET_SESSION_PREFIX.$this->prefix_.$name;
   }
   /**
-   * �����åȤ˻Ȥ���ȡ�������������롣
+   * チケットに使われるトークンを生成する。
    * 
-   * �����åȤΥ�ˡ��������ݾڤ��뤿���ȯ�Ԥ����ȡ�������֤���
-   * ���Υȡ�����������ˤϥ��饤����Ȥ�����Ǥ���褦�ʾ���ʥ��å���� ID �ʤɡˤ򺮤��ƤϤʤ�ʤ���
+   * チケットのユニーク性を保証するために発行されるトークンを返す。
+   * このトークンの生成にはクライアントを特定できるような情報（セッション ID など）を混ぜてはならない。
    * @access private
-   * @param string $name �����åȤ�̾����ȯ�Ի��ȸ��ڻ���Ʊ��̾����Ȥ����ȡ����ΤȤ���̤����
-   * @return string �������줿�ȡ�����
+   * @param string $name チケットの名前。発行時と検証時は同じ名前を使うこと。今のところ未使用
+   * @return string 生成されたトークン。
    */
   function generateToken_($name)
   {
     return md5(__LINE__.microtime().mt_rand());
   }
   /**
-   * $name �����ꤵ�������åȤ�ΤƤ��̵���ˤ���ˡ�
+   * $name で特定されるチケットを捨てる（無効にする）。
    * 
-   * $name �����ꤵ�������åȤ򥻥å���󤫤�õ�롣
-   * �ʸ塢$name ��ɳ�Ť������åȤ�̵���Ȥʤꡢ���ڤ˼��Ԥ��롣
+   * $name で特定されるチケットをセッションから消去する。
+   * 以後、$name に紐づくチケットは無効となり、検証に失敗する。
    * 
-   * �����åȸ��ڤ˼��Ԥ����Ȥ��䡢���ڤ˹�ʤ�����ϡ�
-   * ɬ�����������åȤ򤳤Υ᥽�åɤ�̵�������뤳�ȡ�
-   * ɸ��ǤϤɤ���⸡�ڤκݤ˼�ư�ǹԤ��롣
+   * チケット検証に失敗したときや、検証に合格した後は、
+   * 必ず当該チケットをこのメソッドで無効化すること。
+   * 標準ではどちらも検証の際に自動で行われる。
    * 
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի��ȸ��ڻ���Ʊ��̾����Ȥ����ȡ�
+   * @param string $name チケットの名前。発行時と検証時は同じ名前を使うこと。
    */
   function disposeTicket($name)
   {
     TFSession::unregister($this->getSessionKey($name));
   }
   /**
-   * ���ꤵ�줿���Ϥ������������åȤ򸡾ڤ��롣
+   * 指定された入力から得たチケットを検証する。
    * 
-   * $name �����ꤵ�������åȤ˴ؤ��ơ�$source ���������Ƥ����ȡ�����򸵤˸��ڤ��롣
-   * ���ڤ���������Ȥ��Υ����åȤ��˴����� TRUE ���֤�������ʳ��ξ��� FALSE ���֤���
+   * $name で特定されるチケットに関して、$source から送られてきたトークンを元に検証する。
+   * 検証に成功するとそのチケットを破棄して TRUE を返す。それ以外の場合は FALSE を返す。
    * 
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի���Ʊ��̾����Ȥ����ȡ�
-   * @param array $source $_GET, $_POST �Τ����줫��
-   * @param bool $clearIfValid ���ڤ����������Ȥ��˥����åȤ��˴�����ʤ� TRUE, ����ʳ� FALSE
-   * @return bool ���ڤ����������Ȥ� TRUE, ����ʳ� FALSE
+   * @param string $name チケットの名前。発行時と同じ名前を使うこと。
+   * @param array $source $_GET, $_POST のいずれか。
+   * @param bool $clearIfValid 検証に成功したときにチケットを破棄するなら TRUE, それ以外 FALSE
+   * @return bool 検証に成功したとき TRUE, それ以外 FALSE
    */
   function validate_($name, &$source, $clearIfValid = TRUE)
   {
@@ -122,30 +122,30 @@ class TFTicketVerifier
     return FALSE;
   }
   /**
-   * GET/POST �������������åȤ򸡾ڤ��롣
+   * GET/POST から得たチケットを検証する。
    * 
-   * GET/POST �Τɤ���Ǽ�����ä������åȤ⸡�ڤ��оݤˤ��롣
-   * ���ڤ���������Ȥ��Υ����åȤ��˴����� TRUE ���֤�������ʳ��ξ��� FALSE ���֤���
+   * GET/POST のどちらで受け取ったチケットも検証の対象にする。
+   * 検証に成功するとそのチケットを破棄して TRUE を返す。それ以外の場合は FALSE を返す。
    * 
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի���Ʊ��̾����Ȥ����ȡ�
-   * @param bool $clearIfValid ���ڤ����������Ȥ��˥����åȤ��˴�����ʤ� TRUE, ����ʳ� FALSE
-   * @return bool ���ڤ����������Ȥ� TRUE, ����ʳ� FALSE
+   * @param string $name チケットの名前。発行時と同じ名前を使うこと。
+   * @param bool $clearIfValid 検証に成功したときにチケットを破棄するなら TRUE, それ以外 FALSE
+   * @return bool 検証に成功したとき TRUE, それ以外 FALSE
    */
   function validateTicketInRequest($name, $clearIfValid = TRUE)
   {
     return $this->validate_($name, $_REQUEST, $clearIfValid);
   }
   /**
-   * POST �������������åȤΤߤ򸡾ڤ��롣
+   * POST から得たチケットのみを検証する。
    * 
-   * POST �Ǽ�����ä������åȤ����򸡾ڤ��оݤˤ��롣
-   * ���ڤ���������Ȥ��Υ����åȤ��˴����� TRUE ���֤�������ʳ��ξ��� FALSE ���֤���
+   * POST で受け取ったチケットだけを検証の対象にする。
+   * 検証に成功するとそのチケットを破棄して TRUE を返す。それ以外の場合は FALSE を返す。
    * 
    * @access public
-   * @param string $name �����åȤ�̾����ȯ�Ի���Ʊ��̾����Ȥ����ȡ�
-   * @param bool $clearIfValid ���ڤ����������Ȥ��˥����åȤ��˴�����ʤ� TRUE, ����ʳ� FALSE
-   * @return bool ���ڤ����������Ȥ� TRUE, ����ʳ� FALSE
+   * @param string $name チケットの名前。発行時と同じ名前を使うこと。
+   * @param bool $clearIfValid 検証に成功したときにチケットを破棄するなら TRUE, それ以外 FALSE
+   * @return bool 検証に成功したとき TRUE, それ以外 FALSE
    */
   function validateTicketInPost($name, $clearIfValid = TRUE)
   {

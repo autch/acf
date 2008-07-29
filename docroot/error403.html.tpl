@@ -1,9 +1,9 @@
 {include file="header.tpl" title="403 Forbidden"}
 
-<p>���Υڡ����ؤΥ��������϶ػߤ���Ƥ��ޤ���</p>
+<p>このページへのアクセスは禁止されています。</p>
 
 <ul>
-<li>�ڡ�����¦�Υ�˥塼������Ū�Υ���ƥ�Ĥ�õ������������</li>
+<li>ページ左側のメニューから目的のコンテンツをお探しください。</li>
 </ul>
 
 {include file="footer.tpl"}

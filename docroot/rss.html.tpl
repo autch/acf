@@ -5,7 +5,7 @@
 <p>This is rss.html.tpl.  Find me in
 {$smarty.const.TF_DOCUMENT_ROOT}rss.html.tpl</p>
 
-<h2>MSN »º·Ð¥Ë¥å¡¼¥¹ - ÃíÌÜ</h2>
+<h2>MSN ç”£çµŒãƒ‹ãƒ¥ãƒ¼ã‚¹ - æ³¨ç›®</h2>
 
 {load_rss url="http://sankei.jp.msn.com/rss/news/points.xml" assign="rss"}
 <div>

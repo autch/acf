@@ -4,11 +4,11 @@
   mb_http_output('euc-jp');
   mb_internal_encoding('euc-jp');
 
-  // URL еыб╝е╚д╪д╬└ф┬╨е╤е╣
-  define('TF_URL_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . '/acf/test/www/');
-	// ▓ш┴№ URL еыб╝е╚д╪д╬└ф┬╨е╤е╣
+  // URL уГлуГ╝уГИуБ╕уБоч╡╢хп╛уГСуВ╣
+  define('TF_URL_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . '/acf/www/');
+	// чФ╗хГП URL уГлуГ╝уГИуБ╕уБоч╡╢хп╛уГСуВ╣
   define('TF_URL_IMAGES', TF_URL_ROOT . 'images');
-  // docroot д╪д╬╩к═¤е╟егеьепе╚еъбгд│д╬е╒ебедеыд╬ dir д╚╞▒д╕д╧д║
+  // docroot уБ╕уБочЙйчРЖуГЗуВгуГмуВпуГИуГкуАВуБУуБоуГХуВбуВдуГлуБо dir уБихРМуБШуБпуБЪ
   define('TF_DOCUMENT_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'docroot' . DIRECTORY_SEPARATOR);
   define('TF_SMARTY_TEMPLATES', dirname(__FILE__) . '/templates/');
 
