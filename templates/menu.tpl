@@ -1,7 +1,7 @@
 <div>
-{* {a} plugin: front controller 'page' °Ê¹ß¤ÎÁêÂĞ¥Ñ¥¹¤ò½ñ¤±¤ë  *}
-{* {file} plugin: docroot °Ê²¼¤Î¼Âºİ¤Î¥Õ¥¡¥¤¥ë¤òÁêÂĞ¥Ñ¥¹¤Ç½ñ¤±¤ë *}
-{a href="/"}¥È¥Ã¥×{/a}
+{* {a} plugin: front controller 'page' ä»¥é™ã®ç›¸å¯¾ãƒ‘ã‚¹ã‚’æ›¸ã‘ã‚‹  *}
+{* {file} plugin: docroot ä»¥ä¸‹ã®å®Ÿéš›ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç›¸å¯¾ãƒ‘ã‚¹ã§æ›¸ã‘ã‚‹ *}
+{a href="/"}ãƒˆãƒƒãƒ—{/a}
  | {a href="/rss.html"}RSS{/a}
  | {a href="/link.html"}Link{/a}
  | {a href="/phpinfo.html"}phpinfo(){/a}

@@ -1,7 +1,7 @@
 <hr/>
 {if !empty($usage)}
-  ½èÍı»ş´Ö¡§{$usage.time|escape} ÉÃ¡¢
-  »ÈÍÑ¥á¥â¥ê¡§{$usage.memory|escape} K ¥Ğ¥¤¥È<br />
+  å‡¦ç†æ™‚é–“ï¼š{$usage.time|escape} ç§’ã€
+  ä½¿ç”¨ãƒ¡ãƒ¢ãƒªï¼š{$usage.memory|escape} K ãƒã‚¤ãƒˆ<br />
 {/if}
 <p>I'm a footer.  Find me in {$smarty.const.TF_SMARTY_TEMPLATES}footer.tpl</p>
 

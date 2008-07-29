@@ -1,8 +1,8 @@
 <?php
   // for mizuho.autch.net
   error_reporting(E_ALL);
-  mb_http_output('euc-jp');
-  mb_internal_encoding('euc-jp');
+  mb_http_output('UTF-8');
+  mb_internal_encoding('UTF-8');
 
   // URL ルートへの絶対パス
   define('TF_URL_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . '/acf/www/');

@@ -54,7 +54,7 @@ function compare_file_item($key, $order, $x, $y)
 	{
 	case 'size':
 	case 'date':
-		// É¬¤ºÇò¹õ¤Ä¤±¤ë
+		// å¿…ãšç™½é»’ã¤ã‘ã‚‹
 		if($x[$key] != $y[$key])
 			return $order * (($x[$key] < $y[$key]) ? -1 : 1);
 	case 'name':

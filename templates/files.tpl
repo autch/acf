@@ -1,8 +1,8 @@
 <table class="outer" border="1">
 <tr>
-  <th><a href="?o={if $order == 'name'}!{/if}name" rel="nofollow">¥Õ¥¡¥¤¥ëÌ¾</a></th>
-  <th><a href="?o={if $order == 'date'}!{/if}date" rel="nofollow">ºÇ½ª¹¹¿·Æü»ş</a></th>
-  <th><a href="?o={if $order == 'size'}!{/if}size" rel="nofollow">¥Õ¥¡¥¤¥ë¥µ¥¤¥º</a></th>
+  <th><a href="?o={if $order == 'name'}!{/if}name" rel="nofollow">ãƒ•ã‚¡ã‚¤ãƒ«å</a></th>
+  <th><a href="?o={if $order == 'date'}!{/if}date" rel="nofollow">æœ€çµ‚æ›´æ–°æ—¥æ™‚</a></th>
+  <th><a href="?o={if $order == 'size'}!{/if}size" rel="nofollow">ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º</a></th>
 </tr>
 {foreach from=$files item=file}
 <tr class="{cycle name="eo" values="even,odd"}">
@@ -12,9 +12,9 @@
 </tr>
 {/foreach}
 <tr>
-<th>{$count|number_format|escape} ¸Ä¤Î¥Õ¥¡¥¤¥ë</th>
+<th>{$count|number_format|escape} å€‹ã®ãƒ•ã‚¡ã‚¤ãƒ«</th>
 <th></th>
-<th>{$total|number_format|escape} ¥Ğ¥¤¥È</th>
+<th>{$total|number_format|escape} ãƒã‚¤ãƒˆ</th>
 </tr>
 </table>
 
