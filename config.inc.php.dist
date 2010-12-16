@@ -6,7 +6,7 @@
 
   // URL ルートへの絶対パス
   define('TF_URL_ROOT', 'http://' . $_SERVER['HTTP_HOST'] . '/acf/www/');
-	// 画像 URL ルートへの絶対パス
+  // 画像 URL ルートへの絶対パス
   define('TF_URL_IMAGES', TF_URL_ROOT . 'images');
   // docroot への物理ディレクトリ。このファイルの dir と同じはず
   define('TF_DOCUMENT_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'docroot' . DIRECTORY_SEPARATOR);
